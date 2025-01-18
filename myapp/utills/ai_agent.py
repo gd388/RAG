@@ -5,28 +5,35 @@ key = "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"
 
 def analyze_code(file_content, file_name):
     prompt = f"""
-            Analyze the code on these checks:
-            - Code style and formatting issue
-            - Potential bugs or errors
-            - Performance improvements
-            - Best Practices
+                Analyze the code on these checks:
+                - Code style and formatting issue
+                - Potential bugs or errors
+                - Performance improvements
+                - Best Practices
 
-    File: {file_name}
-    Content: {file_content}
+                File: {file_name}
+                Content: {file_content}
 
-    Provide a detailed JSON output with the structure:
-    {{
-        "issues": [
-            {{
-                "type": "<style|bugs|performance|best_practice>",
-                "line": <line_number>,
-                "description": "<description>",
-                "suggestion": "<suggestion>"
-            }}
-        ]
-    }}
-    """
-    
+                Please make sure the output follows the exact structure below in valid JSON format:
+
+                {{
+                    "task_id": "<task_id>",
+                    "status": "<status>",
+                    "result": {{
+                        "file_name": "<file_name>",
+                        "issues": [
+                            {{
+                                "type": "<style|bugs|performance|best_practice>",
+                                "line": <line_number>,
+                                "description": "<description>",
+                                "suggestion": "<suggestion>"
+                            }}
+                        ]
+                    }}
+                }}
+                """
+
+
     try:
         client = Groq(api_key=key)
         completion = client.chat.completions.create(
