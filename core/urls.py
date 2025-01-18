@@ -1,8 +1,8 @@
 """
-URL configuration for core project.
+URL configuration for django_app project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.1/topics/http/urls/
+    https://docs.djangoproject.com/en/4.2/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -16,9 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from myapp.views import start_task,task_status
+from myapp.views import start_task,task_status_view
+
 urlpatterns = [
+    path('start_task/', start_task),
+    path('task_status_view/<task_id>/', task_status_view),
     path('admin/', admin.site.urls),
-    path('start_task/' , start_task),
-    path('task_status/<task_id>/',task_status),
 ]
